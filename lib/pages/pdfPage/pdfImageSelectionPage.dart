@@ -20,7 +20,7 @@ class SelectionImages extends StatefulWidget {
 
 class _SelectionImagesState extends State<SelectionImages> {
   Navigations nav = Navigations();
-  bool isGeneratingPDF = false; // Add a flag for tracking PDF generation status
+  bool isGeneratingPDF = false;
 
   @override
   void initState() {
@@ -56,8 +56,7 @@ class _SelectionImagesState extends State<SelectionImages> {
                         text: "cancel",
                         onPressed: () {
                           Navigator.pop(context);
-                          ScaffoldMessenger(
-                              child: SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text("Storage Permission is not given"),
                             duration: Duration(seconds: 2),
                           ));
@@ -71,7 +70,19 @@ class _SelectionImagesState extends State<SelectionImages> {
                     child: button(
                         text: "Allow",
                         onPressed: () async {
-                          openAppSettings();
+                          try {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Opening App Settings..."),
+                              duration: Duration(seconds: 2),
+                            ));
+                            await openAppSettings();
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Failed to Open Setting of App"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
+
                           Navigator.pop(context);
                         },
                         mainbutton: true),
@@ -110,6 +121,10 @@ class _SelectionImagesState extends State<SelectionImages> {
                         text: "cancel",
                         onPressed: () {
                           Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Camera Permission is not given"),
+                            duration: Duration(seconds: 2),
+                          ));
                         },
                         mainbutton: false),
                   ),
@@ -120,7 +135,18 @@ class _SelectionImagesState extends State<SelectionImages> {
                     child: button(
                         text: "Allow",
                         onPressed: () async {
-                          await openAppSettings();
+                          try {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Opening App Settings..."),
+                              duration: Duration(seconds: 2),
+                            ));
+                            await openAppSettings();
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Failed to Open Setting of App"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
                           Navigator.pop(context);
                         },
                         mainbutton: true),

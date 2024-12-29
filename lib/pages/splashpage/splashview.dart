@@ -7,26 +7,14 @@ import 'package:imagetopdf/pages/splashpage/splashwidgets.dart';
 import 'package:imagetopdf/utils/assets.dart';
 import 'package:imagetopdf/utils/colors.dart';
 
-class Splashpage extends StatefulWidget {
+class Splashpage extends StatelessWidget {
   const Splashpage({super.key});
-
-  @override
-  State<Splashpage> createState() => _SplashpageState();
-}
-
-class _SplashpageState extends State<Splashpage> {
-  Navigations nav = Navigations();
-
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 3), () {
-      nav.replace(context, const HomePage());
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+      Navigations nav = Navigations();
+     Timer(const Duration(seconds: 2), () {
+      nav.replace(context, const HomePage());
+    });
     return Scaffold(
         backgroundColor: colors.primary,
         body: Column(

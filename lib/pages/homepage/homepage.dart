@@ -74,6 +74,10 @@ class _HomePageState extends State<HomePage> {
                         text: "cancel",
                         onPressed: () {
                           Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Storage Permission is Not given"),
+                            duration: Duration(seconds: 2),
+                          ));
                         },
                         mainbutton: false),
                   ),
@@ -84,7 +88,18 @@ class _HomePageState extends State<HomePage> {
                     child: button(
                         text: "Allow",
                         onPressed: () async {
-                          openAppSettings();
+                          try {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Opening App Settings..."),
+                              duration: Duration(seconds: 2),
+                            ));
+                            await openAppSettings();
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Failed to Open Setting of App"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
                           Navigator.pop(context);
                         },
                         mainbutton: true),
@@ -123,6 +138,10 @@ class _HomePageState extends State<HomePage> {
                         text: "cancel",
                         onPressed: () {
                           Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                            content: Text("camera permission is not given"),
+                            duration: Duration(seconds: 2),
+                          ));
                         },
                         mainbutton: false),
                   ),
@@ -132,8 +151,19 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: button(
                         text: "Allow",
-                        onPressed: () {
-                          openAppSettings();
+                        onPressed: () async {
+                          try {
+                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Opening App Settings..."),
+                              duration: Duration(seconds: 2),
+                            ));
+                            await openAppSettings();
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Failed to Open Setting of App"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
                           Navigator.pop(context);
                         },
                         mainbutton: true),
